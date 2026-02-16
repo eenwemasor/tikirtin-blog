@@ -1,26 +1,269 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* --- Fonts --- */
+  --font-primary: "Eczar", "sans-serif";
+  --font-inter: "Inter", "sans-serif";
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* --- Breakpoints --- */
+  --breakpoint-2xsm: 375px;
+  --breakpoint-xsm: 425px;
+  --breakpoint-3xl: 2000px;
+  /* Note: Complex raw queries like lgh/sgh are handled via custom @media below the theme block */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* --- Colors --- */
+  --color-transparent: transparent;
+  --color-white: #ffffff;
+  
+  --color-black: #1b263b;
+  --color-black-50: #e3e6eb;
+  --color-black-100: #c6ccd8;
+  --color-black-200: #9ea6ba;
+  --color-black-300: #76809b;
+  --color-black-400: #4f5a7c;
+  --color-black-500: #1b263b;
+  --color-black-600: #161f30;
+  --color-black-700: #111825;
+  --color-black-800: #0b111a;
+  --color-black-900: #050a0f;
+
+  --color-red: #df1c41;
+  --color-red-50: #ffe5ea;
+  --color-red-100: #fccdd4;
+  --color-red-200: #f99caa;
+  --color-red-300: #f76a7f;
+  --color-red-400: #f43855;
+  --color-red-500: #df1c41;
+  --color-red-600: #b91436;
+  --color-red-700: #930f2a;
+  --color-red-800: #6d091f;
+  --color-red-900: #470414;
+
+  --color-primary: #4d194d;
+  --color-primary-50: #f6eef6;
+  --color-primary-100: #e8d1e8;
+  --color-primary-200: #d1a3d1;
+  --color-primary-300: #ba74ba;
+  --color-primary-400: #a346a3;
+  --color-primary-500: #4d194d;
+  --color-primary-600: #3d143d;
+  --color-primary-700: #2e0f2e;
+  --color-primary-800: #1f0a1f;
+  --color-primary-900: #100510;
+
+  --color-success: #219653;
+  --color-success-100: #e6f4ec;
+  --color-success-200: #c1e3d0;
+  --color-success-300: #9cd2b4;
+  --color-success-400: #77c198;
+  --color-success-500: #219653;
+  --color-success-600: #1b7a44;
+  --color-success-700: #155e35;
+
+  --color-info: #2d9cdb;
+  --color-info-50: #eaf6fc;
+  --color-info-100: #cde9f8;
+  --color-info-200: #9fd7f3;
+  --color-info-300: #71c5ee;
+  --color-info-400: #43b3e9;
+  --color-info-500: #2d9cdb;
+  --color-info-600: #237db0;
+  --color-info-700: #1a5e84;
+  --color-info-800: #103f59;
+  --color-info-900: #071f2d;
+
+  --color-secondary: #ffccd5;
+  --color-secondary-lighter: #ffccd51a;
+  --color-body: #edede9;
+  --color-stroke: #e2e8f0;
+  --color-gray: #9a9a9a;
+  --color-gray-lighter: #cbcbcb;
+  --color-gray-hover: #f1f1f1;
+  --color-danger: #d34053;
+  --color-warning: #ffa70b;
+  --color-normal: #818898;
+  --color-link: #4c4cd9;
+  --color-background: #4d194d1a;
+  --color-background-dark: #4d194d2a;
+
+  /* --- Font Sizes --- */
+  --font-size-title-xxl: 44px;
+  --font-size-title-xxl--line-height: 55px;
+  --font-size-title-xl: 36px;
+  --font-size-title-xl--line-height: 45px;
+  --font-size-title-xl2: 33px;
+  --font-size-title-xl2--line-height: 45px;
+  --font-size-title-lg: 28px;
+  --font-size-title-lg--line-height: 35px;
+  --font-size-title-md: 24px;
+  --font-size-title-md--line-height: 30px;
+  --font-size-title-md2: 26px;
+  --font-size-title-md2--line-height: 30px;
+  --font-size-title-sm: 20px;
+  --font-size-title-sm--line-height: 26px;
+  --font-size-title-xsm: 18px;
+  --font-size-title-xsm--line-height: 24px;
+
+  /* --- Spacing --- */
+  /* Decimals like 4.5 are defined using underscore 4_5 */
+  --spacing-4_5: 1.125rem;
+  --spacing-5_5: 1.375rem;
+  --spacing-6_5: 1.625rem;
+  --spacing-7_5: 1.875rem;
+  --spacing-8_5: 2.125rem;
+  --spacing-9_5: 2.375rem;
+  --spacing-10_5: 2.625rem;
+  --spacing-11: 2.75rem;
+  --spacing-11_5: 2.875rem;
+  --spacing-12_5: 3.125rem;
+  --spacing-13: 3.25rem;
+  --spacing-13_5: 3.375rem;
+  --spacing-14: 3.5rem;
+  --spacing-14_5: 3.625rem;
+  --spacing-15: 3.75rem;
+  --spacing-15_5: 3.875rem;
+  --spacing-16: 4rem;
+  --spacing-16_5: 4.125rem;
+  --spacing-17: 4.25rem;
+  --spacing-17_5: 4.375rem;
+  --spacing-18: 4.5rem;
+  --spacing-18_5: 4.625rem;
+  --spacing-19: 4.75rem;
+  --spacing-19_5: 4.875rem;
+  --spacing-21: 5.25rem;
+  --spacing-21_5: 5.375rem;
+  --spacing-22: 5.5rem;
+  --spacing-22_5: 5.625rem;
+  --spacing-24_5: 6.125rem;
+  --spacing-25: 6.25rem;
+  --spacing-25_5: 6.375rem;
+  --spacing-26: 6.5rem;
+  --spacing-27: 6.75rem;
+  --spacing-27_5: 6.875rem;
+  --spacing-29: 7.25rem;
+  --spacing-29_5: 7.375rem;
+  --spacing-30: 7.5rem;
+  --spacing-31: 7.75rem;
+  --spacing-32_5: 8.125rem;
+  --spacing-34: 8.5rem;
+  --spacing-34_5: 8.625rem;
+  --spacing-35: 8.75rem;
+  --spacing-36_5: 9.125rem;
+  --spacing-37_5: 9.375rem;
+  --spacing-39: 9.75rem;
+  --spacing-39_5: 9.875rem;
+  --spacing-40: 10rem;
+  --spacing-42_5: 10.625rem;
+  --spacing-44: 11rem;
+  --spacing-45: 11.25rem;
+  --spacing-46: 11.5rem;
+  --spacing-47_5: 11.875rem;
+  --spacing-49: 12.25rem;
+  --spacing-50: 12.5rem;
+  --spacing-52: 13rem;
+  --spacing-52_5: 13.125rem;
+  --spacing-54: 13.5rem;
+  --spacing-54_5: 13.625rem;
+  --spacing-55: 13.75rem;
+  --spacing-55_5: 13.875rem;
+  --spacing-59: 14.75rem;
+  --spacing-60: 15rem;
+  --spacing-62_5: 15.625rem;
+  --spacing-65: 16.25rem;
+  --spacing-67: 16.75rem;
+  --spacing-67_5: 16.875rem;
+  --spacing-70: 17.5rem;
+  --spacing-72_5: 18.125rem;
+  --spacing-73: 18.25rem;
+  --spacing-75: 18.75rem;
+  --spacing-90: 22.5rem;
+  --spacing-94: 23.5rem;
+  --spacing-95: 23.75rem;
+  --spacing-100: 25rem;
+  --spacing-115: 28.75rem;
+  --spacing-125: 31.25rem;
+  --spacing-132_5: 33.125rem;
+  --spacing-150: 37.5rem;
+  --spacing-171_5: 42.875rem;
+  --spacing-180: 45rem;
+  --spacing-187_5: 46.875rem;
+  --spacing-203: 50.75rem;
+  --spacing-230: 57.5rem;
+  --spacing-242_5: 60.625rem;
+
+  /* --- Sizing (Shared Widths) --- */
+  --width-180: 11.25rem;
+  --width-200: 12.5rem;
+  --width-250: 15.625rem;
+  --width-450: 28.125rem;
+  --width-640: 40rem;
+  --width-400: 25rem;
+  --width-500: 31.25rem;
+  --width-900: 56.25rem;
+  --width-700: 43.75rem;
+  --width-1024: 64rem;
+  --width-1000: 62.5rem;
+  --width-1120: 70rem;
+  --width-1280: 80rem;
+
+  /* --- Max Heights --- */
+  --max-height-35: 8.75rem;
+  --max-height-70: 17.5rem;
+  --max-height-90: 22.5rem;
+  --max-height-550: 34.375rem;
+  --max-height-300: 18.75rem;
+
+  /* --- Z-Index --- */
+  --z-index-1: 1;
+  --z-index-9: 9;
+  --z-index-99: 99;
+  --z-index-999: 999;
+  --z-index-9999: 9999;
+  --z-index-99999: 99999;
+  --z-index-999999: 999999;
+
+  /* --- Opacity --- */
+  --opacity-65: .65;
+
+  /* --- Borders & Shadows --- */
+  --border-width-6: 6px;
+  
+  --shadow-default: 0px 8px 13px -3px rgba(0, 0, 0, 0.07);
+  --shadow-card: 0px 1px 3px rgba(0, 0, 0, 0.12);
+  --shadow-card-2: 0px 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-switcher: 0px 2px 4px rgba(0, 0, 0, 0.2), inset 0px 2px 2px #FFFFFF, inset 0px -1px 1px rgba(0, 0, 0, 0.1);
+  --shadow-switch-1: 0px 0px 5px rgba(0, 0, 0, 0.15);
+  --shadow-1: 0px 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-2: 0px 1px 4px rgba(0, 0, 0, 0.12);
+  --shadow-3: 0px 1px 5px rgba(0, 0, 0, 0.14);
+  --shadow-4: 0px 4px 10px rgba(0, 0, 0, 0.12);
+  --shadow-5: 0px 1px 1px rgba(0, 0, 0, 0.15);
+  --shadow-6: 0px 3px 15px rgba(0, 0, 0, 0.1);
+  --shadow-7: -5px 0 0 #313D4A, 5px 0 0 #313D4A;
+  --shadow-8: 1px 0 0 #313D4A, -1px 0 0 #313D4A, 0 1px 0 #313D4A, 0 -1px 0 #313D4A, 0 3px 13px rgb(0 0 0 / 8%);
+
+  /* --- Keyframes & Animations --- */
+  --animate-ping-once: ping 5s cubic-bezier(0, 0, 0.2, 1);
+  --animate-rotating: rotating 30s linear infinite;
+  --animate-spin-1_5: spin 1.5s linear infinite;
+  --animate-spin-2: spin 2s linear infinite;
+  --animate-spin-3: spin 3s linear infinite;
+
+  @keyframes rotating {
+    0%, 100% { transform: rotate(360deg); }
+    50% { transform: rotate(0deg); }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom raw screens that don't fit simple min-width variables */
+@media (min-height:701px) and (min-width:1024px) {
+  .lgh\:custom-class { /* use standard CSS here if needed */ }
+}
+
+.container {
+  @apply max-w-[1280px] m-auto;
+}
+
+.container-align-left {
+  @apply max-w-[1280px] m-0;
 }
