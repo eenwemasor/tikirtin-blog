@@ -1,65 +1,96 @@
-import Image from "next/image";
+"use client";
+
+import React from "react";
+import HelpSearcher from "@/components/ui/HelpSearcher";
+import Link from "next/link";
+import { helpSections } from "@/components/icons/help-center";
+import Faq from "@/components/ui/Faq";
+
+interface ButtonProps {
+  children: React.ReactNode;
+  className?: string;
+  variant?: "primary" | "outline" | "ghost";
+  onClick?: () => void;
+}
+
+const Button: React.FC<ButtonProps> = ({
+  children,
+  className = "",
+  variant = "primary",
+  onClick,
+}) => {
+  const baseClasses =
+    "inline-flex items-center justify-center rounded-full font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2";
+
+  const variantClasses = {
+    primary: "bg-primary text-white hover:bg-primary/90 focus:ring-primary",
+    outline:
+      "bg-background text-primary border border-transparent hover:bg-background-dark focus:ring-primary",
+    ghost: "text-black hover:bg-gray-100 focus:ring-gray-300",
+  };
+
+  return (
+    <button
+      className={`${baseClasses} ${variantClasses[variant]} ${className}`}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+};
 
 export default function Home() {
   return (
-    <div className="bg-body flex min-h-screen items-center justify-center font-sans">
-      <main className="flex min-h-screen w-full container flex-col items-center justify-between py-32 px-16 bg-body sm:items-start">
-        <Image
-          className=""
-          src="/logo/logo.svg"
-          alt="Tikirtin logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="bg-white min-h-screen">
+      <div className=" mx-auto">
+        <HelpSearcher />
+
+        <div className="container px-4 sm:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mt-8 md:mt-12">
+            {helpSections.map((section, index) => (
+              <Link href={section.route} key={`help-center-sections-${index}`}>
+                <div className="bg-background h-48 md:h-72 flex flex-col items-center justify-center p-4 md:p-6 text-center hover:bg-background-dark hover:text-white cursor-pointer rounded-lg transition-all duration-500 ease-in-out">
+                  <div className="mb-3 md:mb-6">{section.icon}</div>
+                  <h3 className="font-medium text-lg md:text-2xl text-primary mb-2 md:mb-3">
+                    {section.title}
+                  </h3>
+                  <p
+                    className="font-inter font-medium text-sm md:text-md text-black leading-4 md:leading-5"
+                    dangerouslySetInnerHTML={{
+                      __html: section.description || "",
+                    }}
+                  ></p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className=""
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="mt-12 md:mt-16 lg:mt-24">
+          <div className="container px-4 sm:px-6 ">
+            <h1 className="text-primary text-2xl md:text-4xl font-black mb-6 md:mb-8">
+              Frequently asked questions
+            </h1>
+            <Faq />
+          </div>
         </div>
-      </main>
+
+        <section className="flex flex-col items-center mt-12 md:mt-16 mb-12 md:mb-16 px-4">
+          <h3 className="font-['Montserrat'] font-semibold text-xl md:text-2xl text-black mb-4 md:mb-6 text-center">
+            Still Need Help?
+          </h3>
+          <Button
+            onClick={() => {
+              let el = document.querySelector(".siqico-close.zsiq-close-icn");
+              if (!el) el = document.getElementById("zsiq_float");
+              if (el) (el as HTMLElement).click();
+            }}
+            className="px-6 md:px-8 py-3 md:py-4 w-full max-w-71.25 h-11 md:h-12.5 font-semibold text-base md:text-lg rounded-[40px]"
+          >
+            Contact us
+          </Button>
+        </section>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,38 @@
+[
+  {
+    "uuid": "78e13569-c83b-4aa3-9c28-c8f57620a84f",
+    "question": "How do I manage attendee information?",
+    "answer":
+      "You can easily manage attendee information through our comprehensive dashboard. View attendee lists, check-in status, contact details, and export data for your records. Our system automatically organizes all attendee data in one centralized location."
+  },
+  {
+    "uuid": "cf057406-d210-41af-8590-b52521e12705",
+    "question": "What if I need to cancel or postpone my event?",
+    "answer":
+      "If you need to cancel or postpone your event, you can do so through your event dashboard. We'll help you communicate changes to attendees via email notifications and handle refund processing according to your refund policy."
+  },
+  {
+    "uuid": "2068197a-0b0c-4823-86a0-34b4c6a9f3e1",
+    "question": "Are there tools to promote my event?",
+    "answer":
+      "Yes! We provide built-in promotion tools including social media sharing, email marketing templates, QR code generation, and embeddable widgets for your website. You can also track the effectiveness of your promotional efforts."
+  },
+  {
+    "uuid": "7a2acd21-2930-4927-8761-969be396be9e",
+    "question": "Is there a mobile app to manage events on the go?",
+    "answer":
+      "Our platform is fully responsive and works seamlessly on mobile devices. You can manage your events, check attendee lists, process check-ins, and monitor sales directly from your mobile browser."
+  },
+  {
+    "uuid": "8556ffcd-9236-4783-a4b2-7698eaf6fb7d",
+    "question": "How can I get support if I encounter issues?",
+    "answer":
+      "We offer comprehensive support through multiple channels including live chat, email support, and an extensive knowledge base. Our support team is available to help you resolve any issues quickly."
+  },
+  {
+    "uuid": "74e340d2-2764-4a38-83fd-346a3c56e478",
+    "question": "Can I host free events without incurring fees?",
+    "answer":
+      "Yes, you can host free events on our platform without any fees. We only charge processing fees for paid events. Free events have access to most of our core features including registration management and basic analytics."
+  }
+]
