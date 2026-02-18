@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { baseUrl } from "@/sitemap";
 import { CustomMDX } from "@/components/mdx";
 import { formatDate, getArticles } from "@/utils/mdx";
+import { ArticleAside } from "@/components/ui/ArticleAside";
 
 export type Article = {
   metadata: {
@@ -9,6 +10,8 @@ export type Article = {
     publishedAt: string;
     summary: string;
     image?: string;
+    group: string;
+    audience: string;
   };
   content: string;
   slug: string;
@@ -18,7 +21,7 @@ export async function generateStaticParams() {
   const articles = getArticles();
 
   return articles.map((article) => ({
-    group: "ticket-management", // You can adjust this based on your structure
+    group: article.metadata.group.toLowerCase().replace(/\s+/g, '-'),
     slug: article.slug,
   }));
 }
@@ -29,9 +32,14 @@ export async function generateMetadata({
   params: Promise<{ group: string; slug: string }>;
 }) {
   const resolvedParams = await params;
-  const article: Article | undefined = getArticles().find(
-    (article) => article.slug === resolvedParams.slug,
+  const articles = getArticles();
+  const article: Article | undefined = articles.find(
+    (article) => 
+      article.slug === resolvedParams.slug &&
+      article.metadata.group.toLowerCase().replace(/\s+/g, '-') === resolvedParams.group
   );
+
+  console.log("Generating metadata for article:", article);
   if (!article) {
     return;
   }
@@ -76,8 +84,11 @@ export default async function Blog({
   params: Promise<{ group: string; slug: string }>;
 }) {
   const resolvedParams = await params;
-  const article: Article | undefined = getArticles().find(
-    (article) => article.slug === resolvedParams.slug,
+  const articles = getArticles();
+  const article: Article | undefined = articles.find(
+    (article) => 
+      article.slug === resolvedParams.slug &&
+      article.metadata.group.toLowerCase().replace(/\s+/g, '-') === resolvedParams.group
   );
 
   if (!article) {
@@ -85,40 +96,54 @@ export default async function Blog({
   }
 
   return (
-    <section className="max-w-2xl mx-auto">
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "HelpArticle",
-            headline: article.metadata.title,
-            datePublished: article.metadata.publishedAt,
-            dateModified: article.metadata.publishedAt,
-            description: article.metadata.summary,
-            image: article.metadata.image
-              ? `${baseUrl}${article.metadata.image}`
-              : `/og?title=${encodeURIComponent(article.metadata.title)}`,
-            url: `${baseUrl}/${resolvedParams.group}/${article.slug}`,
-            author: {
-              "@type": "Organization",
-              name: "Tikirtin Technology",
-            },
-          }),
-        }}
-      />
-      <h1 className="title font-semibold text-2xl tracking-tighter">
-        {article.metadata.title}
-      </h1>
-      <div className="flex justify-between items-center mt-2 mb-8 text-sm">
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          {formatDate(article.metadata.publishedAt)}
-        </p>
+    <div className="w-full">
+      <div className="flex flex-col lg:flex-row gap-8">
+        <article className="flex-1 mr-30" itemScope itemType="http://schema.org/Article">
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "HelpArticle",
+              headline: article.metadata.title,
+              datePublished: article.metadata.publishedAt,
+              dateModified: article.metadata.publishedAt,
+              description: article.metadata.summary,
+              image: article.metadata.image
+                ? `${baseUrl}${article.metadata.image}`
+                : `/og?title=${encodeURIComponent(article.metadata.title)}`,
+              url: `${baseUrl}/${resolvedParams.group}/${article.slug}`,
+              author: {
+                "@type": "Organization",
+                name: "Tikirtin Technology",
+              },
+            }),
+          }}
+        />
+        
+        <header className="pb-5 md:pt-5">
+          <h1 className="title font-semibold text-2xl tracking-tighter md:text-4xl" itemProp="name">
+            {article.metadata.title}
+          </h1>
+          <div className="flex justify-between items-center mt-2 mb-8 text-sm">
+            <p className="text-sm text-neutral-600 dark:text-neutral-400">
+              {formatDate(article.metadata.publishedAt)}
+            </p>
+          </div>
+        </header>
+        
+        <section className="content prose max-w-" itemProp="articleBody">
+          <CustomMDX source={article.content} />
+        </section>
+        </article>
+
+        <ArticleAside 
+          currentGroup={article.metadata.group}
+          currentSlug={article.slug}
+          articles={articles}
+        />
       </div>
-      <article className="prose">
-        <CustomMDX source={article.content} />
-      </article>
-    </section>
+    </div>
   );
 }
