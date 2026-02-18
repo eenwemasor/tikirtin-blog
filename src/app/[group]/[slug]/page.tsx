@@ -96,7 +96,7 @@ export default async function Blog({
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full mb-20">
       <div className="flex flex-col lg:flex-row gap-8">
         <article className="flex-1 mr-30" itemScope itemType="http://schema.org/Article">
         <script

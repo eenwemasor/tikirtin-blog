@@ -72,23 +72,26 @@ export function ArticleAside({
                     href={`/${currentGroup}/${article.slug}`}
                     className={`flex py-2 items-baseline text-base hover:no-underline ${
                       isCurrentArticle
-                        ? "text-orange-500 font-medium"
-                        : "text-gray-800 hover:text-orange-500"
+                        ? "text-primary-400 font-medium"
+                        : "text-gray-800 hover:text-primary-400"
                     }`}
                   >
-                    <svg
-                      className="text-gray-600 fill-current mr-2 shrink-0"
-                      width="12px"
-                      height="12px"
-                      viewBox="0 0 16 16"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 011.659-.753l5.48 4.796a1 1 0 010 1.506z" />
-                    </svg>
-                    {article.metadata.title}
-                    {isCurrentArticle && (
+                    <div className="flex items-baseline flex-1">
                       <svg
-                        className="ml-2 text-orange-500 fill-current"
+                        className="text-gray-600 fill-current mr-2 shrink-0"
+                        width="12px"
+                        height="12px"
+                        viewBox="0 0 16 16"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 011.659-.753l5.48 4.796a1 1 0 010 1.506z" />
+                      </svg>
+                      {article.metadata.title}
+                    </div>
+                    {isCurrentArticle && (
+                      <div className="w-[5%]">
+                        <svg
+                        className="ml-2 text-primary-400 fill-current"
                         width="12"
                         height="12"
                         viewBox="0 0 426 405"
@@ -97,6 +100,7 @@ export function ArticleAside({
                         <title>Current article</title>
                         <polygon points="213 325 81 405 116 255 0 154 153 141 213 0 273 141 426 154 310 255 345 405" />
                       </svg>
+                      </div>
                     )}
                   </Link>
                 </li>
