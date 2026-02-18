@@ -47,7 +47,7 @@ export function ArticleAside({
 
   return (
     <aside className="w-full lg:w-100 lg:shrink-0 order-first lg:order-last">
-      <div className="my-5 border-t border-b lg:border lg:rounded-md lg:py-4 lg:px-6 lg:my-0">
+      <div className="my-5 border-t border-b lg:border lg:rounded-md lg:py-4 lg:px-6 lg:my-0 border-primary/30">
         <button
           type="button"
           className="cursor-pointer lg:cursor-default my-4 flex items-center justify-between font-medium text-lg w-full text-left bg-transparent border-none p-0"
@@ -73,8 +73,8 @@ export function ArticleAside({
                     href={`/${currentGroup}/${article.slug}`}
                     className={`flex py-2 items-baseline text-base hover:no-underline ${
                       isCurrentArticle
-                        ? "text-primary-400 font-medium"
-                        : "text-gray-800 hover:text-primary-400"
+                        ? "text-primary/60 font-medium"
+                        : "text-gray-800 hover:text-primary/60"
                     }`}
                   >
                     <div className="flex items-baseline flex-1">
@@ -92,7 +92,7 @@ export function ArticleAside({
                     {isCurrentArticle && (
                       <div className="w-[5%]">
                         <svg
-                          className="ml-2 text-primary-400 fill-current"
+                          className="ml-2 text-primary/60 fill-current"
                           width="12"
                           height="12"
                           viewBox="0 0 426 405"
