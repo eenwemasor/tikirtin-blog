@@ -48,15 +48,16 @@ export function ArticleAside({
   return (
     <aside className="w-full lg:w-100 lg:shrink-0 order-first lg:order-last">
       <div className="my-5 border-t border-b lg:border lg:rounded-md lg:py-4 lg:px-6 lg:my-0">
-        <h3
-          className="cursor-pointer lg:cursor-default my-4 flex items-center justify-between font-medium text-lg"
+        <button
+          type="button"
+          className="cursor-pointer lg:cursor-default my-4 flex items-center justify-between font-medium text-lg w-full text-left bg-transparent border-none p-0"
           onClick={toggleExpansion}
           aria-controls="articles-in-section"
           aria-expanded={isExpanded}
         >
-          Articles in this section
+          <span>Articles in this section</span>
           <span className="lg:hidden">{isExpanded ? "−" : "+"}</span>
-        </h3>
+        </button>
 
         <div
           className={`${isExpanded ? "block" : "hidden"} lg:block`}
@@ -91,15 +92,15 @@ export function ArticleAside({
                     {isCurrentArticle && (
                       <div className="w-[5%]">
                         <svg
-                        className="ml-2 text-primary-400 fill-current"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 426 405"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <title>Current article</title>
-                        <polygon points="213 325 81 405 116 255 0 154 153 141 213 0 273 141 426 154 310 255 345 405" />
-                      </svg>
+                          className="ml-2 text-primary-400 fill-current"
+                          width="12"
+                          height="12"
+                          viewBox="0 0 426 405"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <title>Current article</title>
+                          <polygon points="213 325 81 405 116 255 0 154 153 141 213 0 273 141 426 154 310 255 345 405" />
+                        </svg>
                       </div>
                     )}
                   </Link>
