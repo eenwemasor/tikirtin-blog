@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link";
 import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -26,12 +27,14 @@ function Table({ data }: { data: { headers: string[]; rows: string[][] } }) {
   );
 }
 
-function CustomLink(props) {
+function CustomLink(props: any) {
   const href = props.href;
 
   if (href.startsWith("/")) {
+    // Remove 'href' from props to avoid duplicate
+    const { href, ...rest } = props;
     return (
-      <Link href={href} {...props}>
+      <Link href={href} {...rest}>
         {props.children}
       </Link>
     );
@@ -44,12 +47,12 @@ function CustomLink(props) {
   return <a target="_blank" rel="noopener noreferrer" {...props} />;
 }
 
-function RoundedImage(props) {
-  const { width = 600, height = 300, ...otherProps } = props;
+function RoundedImage(props: any) {
+  const { width = 600, height = 300, alt, ...otherProps } = props;
 
   return (
     <Image
-      alt={props.alt}
+      alt={alt}
       className="rounded-lg w-full h-auto"
       width={width}
       height={height}
@@ -58,7 +61,7 @@ function RoundedImage(props) {
   );
 }
 
-function Code({ children, ...props }) {
+function Code({ children, ...props }: { children: string }) {
   const codeHTML = highlight(children);
   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
 }
@@ -109,7 +112,7 @@ const components = {
   Table,
 };
 
-export function CustomMDX(props) {
+export function CustomMDX(props: any) {
   return (
     <MDXRemote
       {...props}
