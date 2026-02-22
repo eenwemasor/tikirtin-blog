@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-        <div className="bg-white min-h-screen flex flex-col gap-6 sm:gap-8 md:gap-10">
+        <div className="bg-body min-h-screen flex flex-col gap-6 sm:gap-8 md:gap-10">
           <div className="px-4 2xl:px-0">
             <header className="container flex justify-between items-start sm:items-center pt-4 sm:pt-6 md:pt-8 gap-4 sm:gap-0">
               <div className="flex items-center">

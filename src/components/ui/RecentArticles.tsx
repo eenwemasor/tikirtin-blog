@@ -50,7 +50,7 @@ const RecentArticles: React.FC<RecentArticlesProps> = ({ articles }) => {
             </p>
           </div>
 
-          <div className="sticky top-20 lg:top-25 z-10 w-full md:self-start bg-white lg:w-auto">
+          <div className="sticky top-20 lg:top-25 z-10 w-full md:self-start bg-body lg:w-auto">
             <div className="grid gap-x-6 md:gap-x-12 md:grid-cols-12 lg:grid-cols-8 lg:mr-6">
               {/* Desktop Title */}
               <div className="hidden col-span-12 text-center duration-500 ease-out lg:col-span-4 lg:text-left lg:px-0 lg:block opacity-100 translate-y-0">

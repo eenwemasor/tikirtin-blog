@@ -258,7 +258,7 @@
 }
 
 body {
-  @apply font-primary;
+  @apply font-primary bg-body;
 }
 
 /* Custom raw screens that don't fit simple min-width variables */
