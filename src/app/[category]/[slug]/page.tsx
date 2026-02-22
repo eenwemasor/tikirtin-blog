@@ -1,27 +1,14 @@
 import { notFound } from "next/navigation";
 import { baseUrl } from "@/sitemap";
 import { CustomMDX } from "@/components/mdx";
-import { formatDate, getArticles } from "@/utils/mdx";
+import { Article, formatDate, getArticles } from "@/utils/mdx";
 import { ArticleAside } from "@/components/ui/ArticleAside";
-
-export type Article = {
-  metadata: {
-    title: string;
-    publishedAt: string;
-    summary: string;
-    image?: string;
-    group: string;
-    audience: string;
-  };
-  content: string;
-  slug: string;
-};
 
 export async function generateStaticParams() {
   const articles = getArticles();
 
   return articles.map((article) => ({
-    group: article.metadata.group.toLowerCase().replace(/\s+/g, '-'),
+    category: article.metadata.category?.toLowerCase().replace(/\s+/g, '-'),
     slug: article.slug,
   }));
 }
@@ -29,14 +16,14 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ group: string; slug: string }>;
+  params: Promise<{ category: string; slug: string }>;
 }) {
   const resolvedParams = await params;
   const articles = getArticles();
   const article: Article | undefined = articles.find(
     (article) => 
       article.slug === resolvedParams.slug &&
-      article.metadata.group.toLowerCase().replace(/\s+/g, '-') === resolvedParams.group
+      article.metadata.category?.toLowerCase().replace(/\s+/g, '-') === resolvedParams.category
   );
 
   console.log("Generating metadata for article:", article);
@@ -62,7 +49,7 @@ export async function generateMetadata({
       description,
       type: "article",
       publishedTime,
-      url: `${baseUrl}/${resolvedParams.group}/${article.slug}`,
+      url: `${baseUrl}/${resolvedParams.category}/${article.slug}`,
       images: [
         {
           url: ogImage,
@@ -81,14 +68,14 @@ export async function generateMetadata({
 export default async function Blog({
   params,
 }: {
-  params: Promise<{ group: string; slug: string }>;
+  params: Promise<{ category: string; slug: string }>;
 }) {
   const resolvedParams = await params;
   const articles = getArticles();
   const article: Article | undefined = articles.find(
     (article) => 
       article.slug === resolvedParams.slug &&
-      article.metadata.group.toLowerCase().replace(/\s+/g, '-') === resolvedParams.group
+      article.metadata.category?.toLowerCase().replace(/\s+/g, '-') === resolvedParams.category
   );
 
   if (!article) {
@@ -113,7 +100,7 @@ export default async function Blog({
               image: article.metadata.image
                 ? `${baseUrl}${article.metadata.image}`
                 : `/og?title=${encodeURIComponent(article.metadata.title)}`,
-              url: `${baseUrl}/${resolvedParams.group}/${article.slug}`,
+              url: `${baseUrl}/${resolvedParams.category}/${article.slug}`,
               author: {
                 "@type": "Organization",
                 name: "Tikirtin Technology",
@@ -139,7 +126,7 @@ export default async function Blog({
         </article>
 
         <ArticleAside 
-          currentGroup={article.metadata.group}
+          currentCategory={article.metadata.category}
           currentSlug={article.slug}
           articles={articles}
         />

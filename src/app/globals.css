@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Eczar:wght@400..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -255,6 +257,10 @@
   }
 }
 
+body {
+  @apply font-primary;
+}
+
 /* Custom raw screens that don't fit simple min-width variables */
 @media (min-height:701px) and (min-width:1024px) {
   .lgh\:custom-class { /* use standard CSS here if needed */ }
@@ -266,4 +272,15 @@
 
 .container-align-left {
   @apply max-w-[1280px] m-0;
+}
+
+/* Blog Animation Classes */
+.border-bottom-animation {
+  position: relative;
+  border-bottom: 1px solid var(--color-stroke);
+  transition: border-color 0.3s ease;
+}
+
+.border-bottom-animation:hover {
+  border-bottom-color: var(--color-primary);
 }

@@ -7,9 +7,9 @@ import Button from "@/components/ui/Button";
 import MainFooter from "@/components/ui/MainFooter";
 
 export const metadata: Metadata = {
-  title: "Tikirtin Help Centre",
+  title: "Tikirtin Blog",
   description:
-    "Find answers to your questions and get support for Tikirtin's services. Explore our comprehensive help center for guides, FAQs, and contact information.",
+    "Stay updated with the latest news, articles, and insights from Tikirtin. Explore our blog for in-depth guides, tips, and stories.",
 };
 
 export default function RootLayout({
@@ -24,7 +24,7 @@ export default function RootLayout({
           <div className="px-4 2xl:px-0">
             <header className="container flex justify-between items-start sm:items-center pt-4 sm:pt-6 md:pt-8 gap-4 sm:gap-0">
               <div className="flex items-center">
-                <Link href="/">
+                <Link href={`${process.env.NEXT_BASE_URL}`}>
                   <Image
                     src="/logo/logo.svg"
                     alt="Tikirtin Logo"
@@ -33,14 +33,14 @@ export default function RootLayout({
                     height={40}
                   />
                 </Link>
-                <Link href="/help">
+                <Link href="/">
                   <span className="ml-3 sm:ml-4 md:ml-6 text-xs sm:text-sm text-black font-black">
-                    Help Centre
+                    Blog
                   </span>
                 </Link>
               </div>
 
-              <Link href="/">
+              <Link href={`${process.env.NEXT_BASE_URL}`}>
                 <Button className="rounded-full" intent="secondary">
                   <span className="font-medium text-xs sm:text-sm">
                     Back to Tikirtin

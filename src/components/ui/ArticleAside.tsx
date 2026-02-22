@@ -2,42 +2,27 @@
 
 import { useState } from "react";
 import Link from "next/link";
-
-type Metadata = {
-  title: string;
-  publishedAt: string;
-  summary: string;
-  image?: string;
-  group: string;
-  audience: string;
-};
-
-type Article = {
-  metadata: Metadata;
-  content: string;
-  slug: string;
-};
-
+import { Article } from "@/utils/mdx";
 interface ArticleAsideProps {
-  currentGroup: string;
+  currentCategory: string;
   currentSlug: string;
   articles: Article[];
 }
 
 export function ArticleAside({
-  currentGroup,
+  currentCategory,
   currentSlug,
   articles,
 }: ArticleAsideProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // Filter articles by the current group
-  const groupArticles = articles.filter(
-    (article) => article.metadata.group === currentGroup,
+  // Filter articles by the current category
+  const categoryArticles = articles.filter(
+    (article) => article.metadata.category === currentCategory,
   );
 
   // Sort articles alphabetically by title
-  const sortedArticles = groupArticles.sort((a, b) =>
+  const sortedArticles = categoryArticles.sort((a, b) =>
     a.metadata.title.localeCompare(b.metadata.title),
   );
 
@@ -70,7 +55,7 @@ export function ArticleAside({
               return (
                 <li key={article.slug}>
                   <Link
-                    href={`/${currentGroup}/${article.slug}`}
+                    href={`/${currentCategory}/${article.slug}`}
                     className={`flex py-2 items-baseline text-base hover:no-underline ${
                       isCurrentArticle
                         ? "text-primary/60 font-medium"
