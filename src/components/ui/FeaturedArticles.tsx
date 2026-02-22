@@ -25,7 +25,6 @@ interface FeaturedArticlesProps {
 const FeaturedArticles: React.FC<FeaturedArticlesProps> = ({ articles }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const featuredArticles = articles.slice(0, 4);
-  console.log("Featured Articles:", featuredArticles);
 
   useEffect(() => {
     const interval = setInterval(() => {

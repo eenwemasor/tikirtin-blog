@@ -26,7 +26,6 @@ export async function generateMetadata({
       article.metadata.category?.toLowerCase().replace(/\s+/g, '-') === resolvedParams.category
   );
 
-  console.log("Generating metadata for article:", article);
   if (!article) {
     return;
   }
