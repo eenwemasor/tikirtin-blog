@@ -53,7 +53,7 @@ export default function RootLayout({
               </Link>
             </header>
           </div>
-          <div className="w-full flex-1 container">{children}</div>
+          <div className="w-full flex-1 container flex flex-col">{children}</div>
           <MainFooter />
         </div>
         {isProd && <GoogleAnalytics gaId="G-WZZJEGMS4V" />}

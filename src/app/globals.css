@@ -284,3 +284,11 @@ body {
 .border-bottom-animation:hover {
   border-bottom-color: var(--color-primary);
 }
+
+.link {
+  @apply text-primary font-semibold hover:underline transition ease-in cursor-pointer;
+}
+
+.link-secondary {
+  @apply text-gray text-sm font-semibold hover:underline transition ease-in cursor-pointer;
+}
