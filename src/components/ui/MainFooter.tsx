@@ -1,10 +1,11 @@
+import { baseUrl, blogBaseUrl, helpBaseUrl } from "@/utils";
 import Link from "next/link";
 import { FaFacebookF, FaLinkedinIn, FaInstagram, FaTiktok } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { MdSupportAgent } from "react-icons/md";
 
 export default function MainFooter() {
-  const baseUrl = process.env.NEXT_BASE_URL || "https://tikirtin.com";
+  
   return (
     <footer className="bg-white border-t border-t-gray-lighter py-4 px-4 text-xs text-black-500">
       <div className="container grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
@@ -27,7 +28,7 @@ export default function MainFooter() {
               </Link>
             </li>
             <li>
-              <Link href={`${baseUrl}/blog`} className="link">
+              <Link href={`${blogBaseUrl}`} className="link">
                 Blog
               </Link>
             </li>
@@ -54,7 +55,7 @@ export default function MainFooter() {
           <h4 className="font-semibold mb-2 text-sm">Support</h4>
           <ul className="space-y-1">
             <li>
-              <Link href={`${baseUrl}/help`} className="link">
+              <Link href={`${helpBaseUrl}`} className="link">
                 Help
               </Link>
             </li>
@@ -64,7 +65,7 @@ export default function MainFooter() {
               </Link>
             </li>
             <li>
-              <Link href={`${baseUrl}/help`} className="link">
+              <Link href={`${helpBaseUrl}`} className="link">
                 FAQs
               </Link>
             </li>
