@@ -6,6 +6,7 @@ import { ArrowBackIcon } from "@/components/icons/help-center";
 import Button from "@/components/ui/Button";
 import MainFooter from "@/components/ui/MainFooter";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Tikirtin Blog",
@@ -18,7 +19,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isProd = process.env.NODE_ENV === 'production'
+  const isProd = process.env.NODE_ENV === "production";
 
   return (
     <html lang="en">
@@ -53,10 +54,30 @@ export default function RootLayout({
               </Link>
             </header>
           </div>
-          <div className="w-full flex-1 container flex flex-col">{children}</div>
+          <div className="w-full flex-1 container flex flex-col">
+            {children}
+          </div>
           <MainFooter />
         </div>
         {isProd && <GoogleAnalytics gaId="G-WZZJEGMS4V" />}
+        {isProd && (
+          <>
+            {/* Initialize Zoho Object */}
+            <Script id="zoho-init" strategy="beforeInteractive">
+              {`
+                window.$zoho = window.$zoho || {};
+                $zoho.salesiq = $zoho.salesiq || { ready: function () {} };
+              `}
+            </Script>
+
+            {/* Load Zoho Widget */}
+            <Script
+              id="zsiqscript"
+              src="https://salesiq.zohopublic.com/widget?wc=siqfa3706b73de6850cc83fd8173507bdafad0171ce719b3c59ec3d75091a7c1982"
+              strategy="afterInteractive"
+            />
+          </>
+        )}
       </body>
     </html>
   );
