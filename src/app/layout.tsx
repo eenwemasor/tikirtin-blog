@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowBackIcon } from "@/components/icons/help-center";
 import Button from "@/components/ui/Button";
 import MainFooter from "@/components/ui/MainFooter";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   title: "Tikirtin Blog",
@@ -17,6 +18,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isProd = process.env.NODE_ENV === 'production'
+
   return (
     <html lang="en">
       <body className="antialiased">
@@ -53,6 +56,7 @@ export default function RootLayout({
           <div className="w-full flex-1 container">{children}</div>
           <MainFooter />
         </div>
+        {isProd && <GoogleAnalytics gaId="G-WZZJEGMS4V" />}
       </body>
     </html>
   );
