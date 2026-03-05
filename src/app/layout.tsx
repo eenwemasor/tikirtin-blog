@@ -9,10 +9,12 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://blog.tikirtin.com"),
   title: "Tikirtin Blog",
   description:
     "Stay updated with the latest news, articles, and insights from Tikirtin. Explore our blog for in-depth guides, tips, and stories.",
 };
+
 
 export default function RootLayout({
   children,

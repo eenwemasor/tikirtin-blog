@@ -27,34 +27,27 @@ export async function generateMetadata({
         resolvedParams.category,
   );
 
-  if (!article) {
-    return;
-  }
+  if (!article) return;
 
-  const {
-    title,
-    publishedAt: publishedTime,
-    summary: description,
-    image,
-  } = article.metadata;
+  const { title, publishedAt: publishedTime, summary: description, image } = article.metadata;
+
   const ogImage = image
-    ? image
+    ? `${baseUrl}${image}`
     : `${baseUrl}/og?title=${encodeURIComponent(title)}`;
+
+  const articleUrl = `${baseUrl}/${resolvedParams.category}/${resolvedParams.slug}`;
 
   return {
     title,
     description,
+    metadataBase: new URL(baseUrl),
     openGraph: {
       title,
       description,
       type: "article",
       publishedTime,
-      url: `${baseUrl}/${resolvedParams.category}/${article.slug}`,
-      images: [
-        {
-          url: ogImage,
-        },
-      ],
+      url: articleUrl,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
     },
     twitter: {
       card: "summary_large_image",
@@ -64,7 +57,6 @@ export async function generateMetadata({
     },
   };
 }
-
 export default async function Blog({
   params,
 }: {
