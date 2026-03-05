@@ -58,7 +58,7 @@ function RoundedImage(props: any) {
   return (
     <Image
       alt={alt}
-      className={`rounded-lg w-[${width}px] h-[${height}px]`}
+      className={`rounded-lg w-[${width}px] h-[${height}px] mb-100`}
       width={width}
       height={height}
       {...otherProps}
