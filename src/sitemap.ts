@@ -4,7 +4,7 @@ export const baseUrl = 'https://tikirtin.com'
 
 export default async function sitemap() {
   const blogs = getArticles().map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
+    url: `${baseUrl}/${post.metadata.category}/${post.slug}`,
     lastModified: post.metadata.publishedAt,
   }))
 
