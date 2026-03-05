@@ -278,6 +278,10 @@ body {
   @apply font-primary bg-body;
 }
 
+.prose {
+  @apply font-inter;
+}
+
 .prose .anchor {
   @apply absolute invisible no-underline;
 
@@ -346,6 +350,34 @@ body {
 
 .prose h4 {
   @apply text-lg font-medium tracking-tight mt-6 mb-2;
+}
+
+.prose table {
+  @apply w-full my-6 border-collapse overflow-hidden rounded-lg border border-black-100 text-left text-sm;
+}
+
+.prose thead {
+  @apply bg-secondary;
+}
+
+.prose th {
+  @apply px-4 py-3 font-semibold text-black-700;
+}
+
+.prose td {
+  @apply px-4 py-3 text-black-500 align-top;
+}
+
+.prose tbody tr {
+  @apply border-t border-body;
+}
+
+.prose tbody tr:nth-child(even) {
+  @apply bg-white;
+}
+
+.prose tbody tr:nth-child(odd) {
+  @apply bg-white;
 }
 
 .link {

@@ -6,6 +6,10 @@ import { highlight } from "sugar-high";
 import React from "react";
 
 function Table({ data }: { data: { headers: string[]; rows: string[][] } }) {
+  if (!data || !data.headers || !data.rows) {
+    return <div></div>;
+  }
+
   const headers = data.headers.map((header, index) => (
     <th key={index}>{header}</th>
   ));
@@ -53,7 +57,7 @@ function RoundedImage(props: any) {
   return (
     <Image
       alt={alt}
-      className="rounded-lg w-full h-auto"
+      className={`rounded-lg w-[${width}px] h-[${height}px]`}
       width={width}
       height={height}
       {...otherProps}
@@ -116,6 +120,7 @@ export function CustomMDX(props: any) {
   return (
     <MDXRemote
       {...props}
+      options={{ blockJS: false }}
       components={{ ...components, ...(props.components || {}) }}
     />
   );

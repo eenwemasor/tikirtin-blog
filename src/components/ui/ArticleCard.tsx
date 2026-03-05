@@ -63,7 +63,13 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
     return (
       <div className="flex relative flex-col gap-y-4 justify-center">
         <p className="flex gap-1 items-center px-2 py-1 bg-background w-fit rounded text-xs">
-          <span>{category || "ARTICLE"}</span>
+          <span>
+            {category
+              ?.replaceAll("-", " ")
+              .split(" ")
+              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(" ") || "ARTICLE"}
+          </span>
           <span>|</span>
           <span>{readTime || "5 mins"}</span>
         </p>
