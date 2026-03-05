@@ -16,6 +16,7 @@ export type Metadata = {
   audience: string;
   category: string;
   readTime: string;
+  featured?: string;
 };
 
 function parseFrontmatter(fileContent: string) {

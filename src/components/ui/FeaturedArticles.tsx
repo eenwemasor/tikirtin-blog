@@ -3,18 +3,10 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import ArticleCard from "./ArticleCard";
+import { Metadata } from "@/utils/mdx";
 
 interface Article {
-  metadata: {
-    title: string;
-    publishedAt: string;
-    summary: string;
-    image?: string;
-    group: string;
-    audience: string;
-    category?: string;
-    readTime?: string;
-  };
+  metadata: Metadata;
   slug: string;
 }
 
@@ -24,7 +16,7 @@ interface FeaturedArticlesProps {
 
 const FeaturedArticles: React.FC<FeaturedArticlesProps> = ({ articles }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const featuredArticles = articles.slice(0, 4);
+  const featuredArticles = articles.filter((article) => article.metadata.featured == 'true');
 
   useEffect(() => {
     const interval = setInterval(() => {

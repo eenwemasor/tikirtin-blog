@@ -119,7 +119,7 @@ export default async function Blog({
           </div>
         </header>
         
-        <section className="content prose max-w-" itemProp="articleBody">
+        <section className="content prose" itemProp="articleBody">
           <CustomMDX source={article.content} />
         </section>
         </article>

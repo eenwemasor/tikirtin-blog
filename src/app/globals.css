@@ -257,10 +257,6 @@
   }
 }
 
-body {
-  @apply font-primary bg-body;
-}
-
 /* Custom raw screens that don't fit simple min-width variables */
 @media (min-height:701px) and (min-width:1024px) {
   .lgh\:custom-class { /* use standard CSS here if needed */ }
@@ -274,15 +270,82 @@ body {
   @apply max-w-[1280px] m-0;
 }
 
-/* Blog Animation Classes */
-.border-bottom-animation {
-  position: relative;
-  border-bottom: 1px solid var(--color-stroke);
-  transition: border-color 0.3s ease;
+html {
+  min-width: 360px;
 }
 
-.border-bottom-animation:hover {
-  border-bottom-color: var(--color-primary);
+body {
+  @apply font-primary bg-body;
+}
+
+.prose .anchor {
+  @apply absolute invisible no-underline;
+
+  margin-left: -1em;
+  padding-right: 0.5em;
+  width: 80%;
+  max-width: 700px;
+  cursor: pointer;
+}
+
+.anchor:hover {
+  @apply visible;
+}
+
+.prose a {
+  @apply underline transition-all decoration-neutral-400 dark:decoration-neutral-600 underline-offset-2 decoration-[0.1em];
+}
+
+.prose .anchor:after {
+  @apply text-neutral-300 dark:text-neutral-700;
+  content: '#';
+}
+
+.prose *:hover > .anchor {
+  @apply visible;
+}
+
+.prose pre {
+  @apply bg-neutral-50 dark:bg-neutral-900 rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-900 py-2 px-3 text-sm;
+}
+
+.prose code {
+  @apply px-1 py-0.5 rounded-lg;
+}
+
+.prose pre code {
+  @apply p-0;
+  border: initial;
+  line-height: 1.5;
+}
+
+.prose code span {
+  @apply font-medium;
+}
+
+.prose img {
+  /* Don't apply styles to next/image */
+  @apply m-0;
+}
+
+.prose p {
+  @apply my-4 text-neutral-800 dark:text-black;
+}
+
+.prose h1 {
+  @apply text-4xl font-medium tracking-tight mt-6 mb-2;
+}
+
+.prose h2 {
+  @apply text-xl font-medium tracking-tight mt-6 mb-2;
+}
+
+.prose h3 {
+  @apply text-xl font-medium tracking-tight mt-6 mb-2;
+}
+
+.prose h4 {
+  @apply text-lg font-medium tracking-tight mt-6 mb-2;
 }
 
 .link {
