@@ -4,6 +4,7 @@ import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { highlight } from "sugar-high";
 import React from "react";
+import { CheckIcon, InfoIcon, XIcon } from "@/utils/icons";
 
 function Table({ data }: { data: { headers: string[]; rows: string[][] } }) {
   if (!data || !data.headers || !data.rows) {
@@ -114,6 +115,9 @@ const components = {
   a: CustomLink,
   code: Code,
   Table,
+  CheckIcon,
+  XIcon,
+  InfoIcon
 };
 
 export function CustomMDX(props: any) {

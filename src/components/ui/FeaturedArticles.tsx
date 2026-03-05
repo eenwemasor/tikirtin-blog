@@ -21,7 +21,7 @@ const FeaturedArticles: React.FC<FeaturedArticlesProps> = ({ articles }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % featuredArticles.length);
-    }, 5000);
+    }, 15000);
     return () => clearInterval(interval);
   }, [featuredArticles.length]);
 
@@ -44,12 +44,14 @@ const FeaturedArticles: React.FC<FeaturedArticlesProps> = ({ articles }) => {
           <div className="order-2 col-span-12 md:col-span-7 lg:col-span-6 md:order-1">
             <div className="grid relative grid-cols-12 gap-6 md:gap-12 items-center h-full transition-transform duration-300 ease-in">
               <div className="overflow-hidden col-span-12">
-                <div className="relative h-64 md:h-80">
+                <div className="relative">
                   {featuredArticles.map((article, index) => (
                     <div
                       key={article.slug}
-                      className={`absolute inset-0 transition-opacity duration-500 ${
-                        index === currentSlide ? "opacity-100" : "opacity-0"
+                      className={`transition-opacity duration-500 ${
+                        index === currentSlide
+                          ? "opacity-100 pointer-events-auto"
+                          : "opacity-0 pointer-events-none absolute inset-0"
                       }`}
                     >
                       <ArticleCard
@@ -65,7 +67,7 @@ const FeaturedArticles: React.FC<FeaturedArticlesProps> = ({ articles }) => {
                     </div>
                   ))}
                 </div>
-                <div className="flex gap-4">
+                <div className="flex gap-4 mt-4">
                   <button
                     onClick={prevSlide}
                     className="cursor-pointer flex justify-center items-center w-12 h-12 rounded bg-primary text-white hover:bg-primary/90 transition-colors"

@@ -83,7 +83,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
           href={`/${category}/${slug}`}
           className="flex justify-start items-center text-primary hover:text-primary/80 transition-colors"
         >
-          <div className="inline-flex items-center text-base md:text-lg font-normal">
+          <div className="inline-flex items-center text-base md:text-lg font-normal mb-10">
             <span>Read article</span>
             <div className="ml-2 transform rotate-135">
               <svg
